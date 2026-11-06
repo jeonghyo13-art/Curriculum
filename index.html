@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>설보연 교육학 PART 1 교육과정 논술·단답 실전 인출 퀴즈</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", "Pretendard", sans-serif;
+    }
+    body {
+      background-color: #f1f5f9;
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: linear-gradient(135deg, #1e1b4b, #3730a3, #2563eb);
+      color: #ffffff;
+      padding: 12px 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.12);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .header-inner {
+      max-width: 840px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand-badge {
+      background: #f59e0b;
+      color: #1e1b4b;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 2px 7px;
+      border-radius: 6px;
+      letter-spacing: -0.5px;
+    }
+    .brand-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .controls-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-top {
+      background-color: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-top:hover {
+      background-color: rgba(255, 255, 255, 0.32);
+    }
+    main {
+      max-width: 840px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 14px 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    /* 필터 탭 바 */
+    .filter-tabs {
+      display: flex;
+      gap: 5px;
+      overflow-x: auto;
+      padding-bottom: 3px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .filter-tabs::-webkit-scrollbar {
+      height: 4px;
+    }
+    .filter-tabs::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .filter-btn {
+      background: white;
+      border: 1px solid #cbd5e1;
+      color: #475569;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 11px;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: 0.15s;
+    }
+    .filter-btn:hover {
+      border-color: #6366f1;
+      color: #312e81;
+    }
+    .filter-btn.active {
+      background: #3730a3;
+      color: white;
+      border-color: #3730a3;
+      box-shadow: 0 1px 3px rgba(55, 48, 163, 0.25);
+    }
+    .filter-btn.special-tab {
+      background: #fffbeb;
+      border-color: #fcd34d;
+      color: #92400e;
+    }
+    .filter-btn.special-tab.active {
+      background: #d97706;
+      border-color: #d97706;
+      color: white;
+    }
+    /* 상단 상태창 */
+    .status-panel {
+      background: white;
+      border-radius: 12px;
+      padding: 12px 16px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: #64748b;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .type-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+    .type-badge.short {
+      background-color: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
+    .type-badge.choice {
+      background-color: #e0e7ff;
+      color: #3730a3;
+      border: 1px solid #c7d2fe;
+    }
+    .category-tag {
+      background: #f1f5f9;
+      color: #475569;
+      padding: 2px 8px;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #4f46e5, #06b6d4);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    /* 문제 카드 */
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 18px 20px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .question-title {
+      font-size: 15.5px;
+      font-weight: 700;
+      line-height: 1.58;
+      color: #0f172a;
+    }
+    .q-num {
+      color: #3730a3;
+      font-weight: 800;
+      margin-right: 4px;
+    }
+    /* 객관식 보기 영역 */
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .option-btn {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      text-align: left;
+      font-size: 13.5px;
+      color: #1e293b;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      transition: all 0.15s ease;
+      line-height: 1.45;
+    }
+    .option-btn:hover:not(:disabled) {
+      background: #f8fafc;
+      border-color: #94a3b8;
+      transform: translateY(-1px);
+    }
+    .option-prefix {
+      color: #4f46e5;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .option-btn.correct {
+      background: #f0fdf4 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: 700;
+    }
+    .option-btn.wrong {
+      background: #fef2f2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+      font-weight: 700;
+    }
+    /* 단답형 입력 폼 영역 */
+    .short-input-zone {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 12px;
+      background: #f8fafc;
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 12px;
+    }
+    .short-input-row {
+      display: flex;
+      gap: 8px;
+    }
+    .short-input {
+      flex: 1;
+      padding: 11px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0f172a;
+      background: #ffffff;
+      border: 1.5px solid #94a3b8;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .short-input:focus {
+      border-color: #3730a3;
+      box-shadow: 0 0 0 3px rgba(55, 48, 163, 0.15);
+    }
+    .short-input:disabled {
+      background: #f1f5f9;
+      color: #475569;
+    }
+    .btn-submit-short {
+      background: #3730a3;
+      color: white;
+      border: none;
+      font-size: 13.5px;
+      font-weight: 700;
+      padding: 0 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .btn-submit-short:hover {
+      background: #1e1b4b;
+    }
+    .short-guide-text {
+      font-size: 12px;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    /* 피드백/해설/논술 모범문장 박스 */
+    .feedback-card {
+      display: none;
+      border-radius: 12px;
+      padding: 14px;
+      animation: fadeIn 0.2s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .feedback-card.is-correct {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #166534;
+    }
+    .feedback-card.is-wrong {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+    }
+    .feedback-header {
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .feedback-body {
+      background: #ffffff;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #334155;
+      border: 1px solid rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .essay-box {
+      background: #eff6ff;
+      border-left: 3.5px solid #2563eb;
+      padding: 8px 10px;
+      border-radius: 4px;
+      font-size: 12.5px;
+      color: #1e40af;
+      line-height: 1.5;
+    }
+    .action-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
+    .btn-next {
+      background: #3730a3;
+      color: white;
+      border: none;
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(55, 48, 163, 0.25);
+      transition: 0.15s;
+    }
+    .btn-next:hover {
+      background: #1e1b4b;
+    }
+    /* 결과 화면 */
+    .result-view {
+      display: none;
+      text-align: center;
+      padding: 26px 18px;
+      gap: 14px;
+    }
+    .score-circle {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: #eef2ff;
+      color: #3730a3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 900;
+      margin: 0 auto;
+      border: 4px solid #c7d2fe;
+    }
+    .stat-boxes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 10px 0;
+    }
+    .stat-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 9px;
+      border-radius: 9px;
+    }
+    .stat-val {
+      font-size: 17px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .stat-lbl {
+      font-size: 11px;
+      color: #64748b;
+    }
+    .review-list {
+      text-align: left;
+      max-height: 280px;
+      overflow-y: auto;
+      margin: 10px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .review-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      line-height: 1.48;
+    }
+    footer {
+      text-align: center;
+      padding: 12px;
+      font-size: 11px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-badge">SANTA 교육학</span>
+        <h1 class="brand-title">PART 1 교육과정 논술·단답 인출 훈련</h1>
+      </div>
+      <div class="controls-bar">
+        <button class="btn-top" id="btn-shuffle" title="문제와 보기를 완전히 섞어 새로 시작합니다.">🔀 무작위 셔플 재시작</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 필터 및 문제 유형 탭 -->
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-filter="all">전체 혼합 모의고사 (72제)</button>
+      <button class="filter-btn special-tab" data-filter="type-short">📝 논술 단답형만 (36제)</button>
+      <button class="filter-btn" data-filter="type-choice">🔘 객관식만 (36제)</button>
+      <button class="filter-btn" data-filter="p1">p.1 유형·사조</button>
+      <button class="filter-btn" data-filter="p2">p.2 조직·개발모형</button>
+      <button class="filter-btn" data-filter="p3">p.3 재개념화·실행</button>
+      <button class="filter-btn" data-filter="p4">p.4 2022개정·제도</button>
+      <button class="filter-btn" data-filter="wrong" id="btn-wrong-tab">오답노트 (0)</button>
+    </div>
+
+    <!-- 진행 상황 표시창 -->
+    <div class="status-panel" id="status-panel">
+      <div class="status-row">
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span class="type-badge short" id="q-type-badge">단답형</span>
+          <span class="category-tag" id="q-category">카테고리</span>
+          <span style="font-weight:700; color:#1e293b;" id="q-progress-text">문항 1 / 72</span>
+        </div>
+        <div>
+          <span>맞힌 점수: <b id="score-text" style="color: #3730a3;">0</b>점</span>
+        </div>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- 문제 풀이 카드 -->
+    <div class="card" id="quiz-card">
+      <div class="question-title" id="q-title">
+        문제를 불러오는 중입니다...
+      </div>
+
+      <!-- 객관식 보기 영역 (type: choice 일 때 활성화) -->
+      <div class="options-grid" id="options-box" style="display: none;"></div>
+
+      <!-- 단답형 입력 폼 영역 (type: short 일 때 활성화) -->
+      <div class="short-input-zone" id="short-input-box" style="display: none;">
+        <div class="short-guide-text">
+          <span>💡 <b>인출 팁:</b> 핵심 개념어, 학자명, 두문자, 또는 조건 키워드를 직접 입력하세요 (Enter 지원)</span>
+        </div>
+        <div class="short-input-row">
+          <input type="text" id="short-input" class="short-input" placeholder="키워드를 직접 타이핑하여 인출하세요..." autocomplete="off">
+          <button type="button" id="btn-submit-short" class="btn-submit-short">정답 인출</button>
+        </div>
+      </div>
+
+      <!-- 피드백 / 인출 팁 / 논술 모범 문장 박스 -->
+      <div class="feedback-card" id="feedback-box">
+        <div class="feedback-header" id="feedback-header"></div>
+        <div class="feedback-body" id="feedback-body"></div>
+        <div class="action-row">
+          <button class="btn-next" id="btn-next">다음 문제 →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 퀴즈 완료 결과 화면 -->
+    <div class="card result-view" id="result-card">
+      <div class="score-circle" id="res-score-badge">0%</div>
+      <h2 style="font-size: 18px; font-weight: 800; color: #0f172a;" id="res-heading">인출 훈련 완료!</h2>
+      <p style="font-size: 13px; color: #64748b;" id="res-desc">결과를 확인하고 논술용 키워드를 다시 점검하세요.</p>
+
+      <div class="stat-boxes">
+        <div class="stat-box">
+          <div class="stat-val" id="res-total">72</div>
+          <div class="stat-lbl">총 문항수</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="res-correct" style="color: #16a34a;">0</div>
+          <div class="stat-lbl">정답수</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="res-wrong" style="color: #dc2626;">0</div>
+          <div class="stat-lbl">오답수</div>
+        </div>
+      </div>
+
+      <!-- 오답 내역 목록 -->
+      <div style="text-align: left; font-size: 13px; font-weight: 700; color: #1e293b; margin-top: 6px;">
+        틀린 문제 논술 핵심 키워드 복습:
+      </div>
+      <div class="review-list" id="review-list"></div>
+
+      <div style="display: flex; gap: 8px; justify-content: center; margin-top: 8px;">
+        <button class="btn-next" id="btn-restart-all">전체 다시 풀기</button>
+        <button class="btn-next" id="btn-restart-wrong" style="background:#dc2626;">틀린 문제만 재도전</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    설보연 SANTA 교육학 PART 1 교육과정 완벽 암기 프로그램 • 임용 논술 서술력 극대화 시스템
+  </footer>
+
+  <script>
+    // 72개 전 범위 문항 (단답형 36문항 + 객관식 36문항 완벽 결합)
+    // 모든 문항에 [essayTip]을 탑재하여 임용고시 논술 답안지 작성용 모범 문장을 제공합니다.
+    const masterDB = [
+      // ==================== [PAGE 1: 교육과정 유형 및 사조] ====================
+      {
+        id: 1, type: 'short', page: 'p1', category: '교육과정 진행과정',
+        q: '진행과정에 따른 교육과정의 3단계 중, "교사가 자신의 관점으로 해석·이해하여 교실 수업 속에서 실제로 실천한 교육과정"을 무엇이라 하는가?',
+        validAnswers: ['실행된 교육과정', '실행된교육과정', '전개된 교육과정', '전개된교육과정', '실천한 교육과정', '실천한교육과정'],
+        tip: '진행과정 3단계: 계획된 cur(공식 문서) → 실행된/전개된 cur(교사 실천) → 경험된/실현된 cur(학생 학습).',
+        essayTip: '논술 작성법: "실행된(전개된) 교육과정이란 공식 문서를 교사가 자신의 교육적 신념과 교수 맥락에 맞추어 주체적으로 해석하고 교실 수업에서 실천한 교육과정을 의미한다."'
+      },
+      {
+        id: 2, type: 'choice', page: 'p1', category: '교육과정 유형',
+        q: '학교의 공식적 계획과 지도 아래 형식문서로서 편제되어 제공되는 모든 교수·학습활동을 의미하는 교육과정은?',
+        options: ['공식적 교육과정 (계획된 교육과정)', '잠재적 교육과정', '영 교육과정', '실제적 교육과정'],
+        answer: 0,
+        tip: '학교의 공인된 의도와 계획이 명시된 교육과정 = 공식적(계획된) 교육과정.',
+        essayTip: '논술 작성법: "공식적 교육과정은 국가 및 학교의 공인된 지침과 교육목표를 반영한 계획된 형식문서이다."'
+      },
+      {
+        id: 3, type: 'short', page: 'p1', category: '잠재적 교육과정',
+        q: '학교에서 의도하거나 계획하지 않았음에도 학교생활(물리적 환경, 제도 등)을 통해 학생들이 은연중에 배우게 되는 지식·태도·행동의 총체를 무엇이라 하는가?',
+        validAnswers: ['잠재적 교육과정', '잠재적교육과정', '잠재적 cur', 'latent curriculum'],
+        tip: '의도성 X, 은연중의 경험의 총체 = 잠재적 교육과정.',
+        essayTip: '논술 작성법: "잠재적 교육과정은 학교가 의도하지 않았으나 학교생활 문화와 환경을 통해 학생들에게 은연중에 내면화되는 경험의 총체로, 긍정적 측면뿐 아니라 교실 내 순종·줄서기 등 부정적 태도도 형성한다."'
+      },
+      {
+        id: 4, type: 'short', page: 'p1', category: '잠재적 교육과정',
+        q: '필립 잭슨(Jackson)이 제시한 학교생활 속 잠재적 교육과정의 원천이 되는 3가지 핵심 학교 환경 요소를 쓰시오.',
+        validAnswers: ['군집성, 상찬, 권력', '군집성 상찬 권력', '군집성,상찬,권력', '상찬, 군집성, 권력', '권력, 상찬, 군집성'],
+        tip: '잭슨 3요소: 군집성(다수의 모임), 상찬(교사·또래의 평가와 보상), 권력(교사의 권위와 통제 규칙).',
+        essayTip: '논술 작성법: "잭슨은 학생들이 학교에서 다수와 어울리는 [군집성], 교사의 평가에 노출되는 [상찬], 교사의 권위에 복종하는 [권력]이라는 환경적 특성을 통해 잠재적 교육과정을 경험한다고 보았다."'
+      },
+      {
+        id: 5, type: 'choice', page: 'p1', category: '숨겨진 교육과정',
+        q: '교육과정을 결정하는 지배 권력자나 집단이 의도·관행으로 계획하였으나, 교사가 동조하거나 간파하지 못하여 학생에게 특정 이데올로기를 전달하는 교육과정은?',
+        options: ['숨겨진 교육과정', '잠재적 교육과정', '영 교육과정', '공식적 교육과정'],
+        answer: 0,
+        tip: '권력자의 의도성 O = 숨겨진 교육과정 / 학교의 의도성 X = 잠재적 교육과정.',
+        essayTip: '논술 작성법: "숨겨진 교육과정은 권력자나 지배집단의 이해관계가 관행적으로 반영되어 학생들을 사회화시키는 의도적 기제이다."'
+      },
+      {
+        id: 6, type: 'short', page: 'p1', category: '영 교육과정',
+        q: '아이즈너(Eisner)가 제안한 개념으로, 배울 가치가 충분히 있음에도 학교나 교사가 가르치지 않아 학생이 학습할 기회를 박탈당한 교육과정을 무엇이라 하는가?',
+        validAnswers: ['영 교육과정', '영교육과정', '영 교육 과정', 'Null curriculum', 'null curriculum'],
+        tip: '배울 가치 O, 교육목표 부합 O, 학교가 가르치지 않아 배울 기회 상실 = 영 교육과정.',
+        essayTip: '논술 작성법: "영 교육과정이란 배울 만한 교육적 가치가 있고 학교 목표에 부합하지만, 학교나 교사의 의도적·무의식적 배제로 인하여 학생들이 학습할 기회를 갖지 못한 교육과정을 의미한다."'
+      },
+      {
+        id: 7, type: 'short', page: 'p1', category: '교과중심 교육과정',
+        q: '능력심리학에 기초하여 "운동을 통해 신체 근육을 단련하듯 고전 및 전통교과를 통해 마음의 지적 능력을 단련·도야할 수 있다"고 보는 이론의 명칭은?',
+        validAnswers: ['형식도야론', '형식 도야론', '형식도야설', 'formal discipline'],
+        tip: '교과중심의 이론적 토대: 능력심리학 기반 형식도야론.',
+        essayTip: '논술 작성법: "형식도야론은 지각, 기억, 추리 등의 정신 능력이 고전 교과(라틴어, 수학 등)의 엄격한 지적 훈련을 통해 일반화되어 도야될 수 있다고 주장한다."'
+      },
+      {
+        id: 8, type: 'choice', page: 'p1', category: '교과중심 조직유형',
+        q: '각 교과의 정체성을 독립적으로 유지하면서도, 역사와 문학작품처럼 서로 관련된 내용을 연결하여 가르치는 설계 방법은?',
+        options: ['상관형 교육과정', '분과형 교육과정', '융합형 교육과정', '광역형 교육과정'],
+        answer: 0,
+        tip: '각 교과 경계 유지 + 교과 간 관련성 부여 = 상관형 교육과정.',
+        essayTip: '논술 작성법: "상관형 교육과정은 각 교과의 고유한 영역을 침해하지 않으면서 유사한 학습 내용을 상호 연계하여 단편적 지식의 한계를 보완한다."'
+      },
+      {
+        id: 9, type: 'short', page: 'p1', category: '교과중심 조직유형',
+        q: '두 개 이상의 교과목에서 공통되는 내용, 개념, 원리, 탐구방법을 추출하여 완전히 "새로운 독립 교과"를 제조직하는 설계 방법은?',
+        validAnswers: ['융합형 교육과정', '융합형교육과정', '융합형', '융합 교육과정'],
+        tip: '공통 요소를 추출하여 새로운 독립 교과를 생성 = 융합형. (유사 교과를 넓게 묶는 것은 광역형)',
+        essayTip: '논술 작성법: "융합형 교육과정은 교과 간 공통 핵심 요소를 추출하여 새로운 융합 교과를 조직함으로써 학생들에게 통합적인 학습 경험을 제공하나, 개별 학문의 고유한 체계성이 약화될 수 있다."'
+      },
+      {
+        id: 10, type: 'choice', page: 'p1', category: '교과중심 조직유형',
+        q: '유사한 교과들을 넓게 묶어서 하나의 교과로 재조직하는 광역형 교육과정(대표 방식: 주제법)의 주요 단점은?',
+        options: [
+          '내용의 깊이가 부족하고 교과 고유의 논리적·분석적 개념체계를 파악하기 어렵다.',
+          '교과 간 통합이 지나치게 어려워 분과주의를 조장한다.',
+          '지식의 기능적 조직이 불가능하여 실생활 문제와 연계되지 않는다.',
+          '교사의 자율성이 과도하게 제한되어 수업이 획일화된다.'
+        ],
+        answer: 0,
+        tip: '광역형 단점: 개략적 내용만 다루어 깊이 부족, 교과 고유의 분석적 사고 및 논리성 이해 저해.',
+        essayTip: '논술 작성법: "광역형 교육과정은 지식의 기능적 통합에는 유리하나, 학습 내용이 피상적이 되어 학문의 고유한 개념 체계와 깊이 있는 분석력을 기르기 어렵다는 한계가 있다."'
+      },
+      {
+        id: 11, type: 'short', page: 'p1', category: '경험중심 교육과정',
+        q: '듀이(Dewey)가 제시한 경험의 원리 2가지(경험이 이전 경험에 이어져 성장한다는 원리, 학습자와 환경이 만난다는 원리)를 쓰시오.',
+        validAnswers: ['계속성의 원리, 상호작용의 원리', '계속성의 원리 상호작용의 원리', '계속성, 상호작용', '계속성의원리, 상호작용의원리'],
+        tip: '듀이 경험의 2대 원리: 계속성의 원리 & 상호작용의 원리.',
+        essayTip: '논술 작성법: "듀이는 교육적 경험이 유의미하려면 과거의 경험이 현재와 미래의 성장으로 이어지는 [계속성의 원리]와, 학습자의 내적 요구가 외부 환경과 능동적으로 만나는 [상호작용의 원리]를 충족해야 한다고 보았다."'
+      },
+      {
+        id: 12, type: 'short', page: 'p1', category: '경험중심 교수방법',
+        q: '경험중심 교육과정에서 킬패트릭(Kilpatrick)이 제안한 것으로, 실제 생활 문제를 스스로 계획하고 실행·평가하는 학습법은?',
+        validAnswers: ['프로젝트 학습법', '프로젝트법', '구안법', 'Project method', '프로젝트 수업'],
+        tip: '킬패트릭의 구안법 = 프로젝트 학습법.',
+        essayTip: '논술 작성법: "킬패트릭의 구안법(프로젝트 학습법)은 학습자가 목적을 설정하고 스스로 계획을 세워 문제를 구체적으로 해결해 나가는 실천적 전인교육 방법이다."'
+      },
+      {
+        id: 13, type: 'short', page: 'p1', category: '경험중심 설계유형',
+        q: '사전 계획 없이 학습 현장에서 교사와 학생이 그들의 흥미와 필요에 따라 함께 협의하여 만들어가는 경험중심 교육과정 설계는?',
+        validAnswers: ['생성형 설계', '생성형 교육과정', '생성형', '생성 교육과정', 'emergent curriculum'],
+        tip: '사전 계획 없음, 현장 공동 생성 = 생성형 설계.',
+        essayTip: '논술 작성법: "생성형 교육과정은 사전 계획 없이 현장에서 학생의 요구에 따라 구성되므로 흥미 유발에 탁월하지만, 교사의 전문성이 부족할 경우 수업의 체계성이 결여될 위험이 있다."'
+      },
+      {
+        id: 14, type: 'choice', page: 'p1', category: '경험중심 설계유형',
+        q: '공통 활동에서 제기된 문제를 해결하는 중심과정과 이를 뒷받침하는 주변과정으로 교육과정을 동심원적으로 설계하는 모형은?',
+        options: ['중핵 설계 (Core Design)', '나선형 교육과정', '분과형 설계', '상관형 설계'],
+        answer: 0,
+        tip: '중핵설계: 중심과정(교과/개인/사회 문제 중심) + 주변과정.',
+        essayTip: '논술 작성법: "중핵 설계는 중심과정(문제해결)과 주변과정(기초교과)을 동심원적으로 연계하여 학생들의 실제적 사회문제 해결력을 신장시킨다."'
+      },
+      {
+        id: 15, type: 'short', page: 'p1', category: '학문중심 교육과정',
+        q: '브루너(Bruner)가 강조한 개념으로, "각 학문의 기저를 이루는 핵심 개념과 일반적 원리들의 상호 연결된 체계"를 무엇이라 하는가?',
+        validAnswers: ['지식의 구조', '지식의구조', 'structure of knowledge'],
+        tip: '학문의 기저를 이루는 핵심 원리·개념 = 지식의 구조.',
+        essayTip: '논술 작성법: "지식의 구조란 특정 학문의 기저를 이루는 핵심 개념과 원리로, 이를 학습하면 학습의 일반적 전이가 용이해지고 내재적 흥미가 증진된다."'
+      },
+      {
+        id: 16, type: 'short', page: 'p1', category: '학문중심 교육과정',
+        q: '브루너의 발견학습에서 학습자가 새로운 지식을 습득하고 활용하는 3단계(획득-□□-평가) 중 빈칸에 들어갈 단계는?',
+        validAnswers: ['변형', 'transformation'],
+        tip: '발견학습 3단계: [획득 → 변형 → 평가].',
+        essayTip: '논술 작성법: "발견학습의 3단계는 새로운 정보를 얻는 [획득], 이를 새로운 과제에 맞게 재구성하는 [변형], 그 조작의 적절성을 점검하는 [평가]로 이루어진다."'
+      },
+      {
+        id: 17, type: 'choice', page: 'p1', category: '통합 교육과정',
+        q: '드레이크(Drake)의 통합 방식 중 "교과 구분을 완전히 초월하여 실생활 주제나 쟁점 중심의 새로운 통합교과를 형성"하는 방식은?',
+        options: ['탈학문적 통합 (Transdisciplinary)', '간학문적 통합 (Interdisciplinary)', '다학문적 통합 (Multidisciplinary)', '분과적 통합'],
+        answer: 0,
+        tip: '학문 독립성 유지 = 다학문적 / 학문 경계 허물고 공통 추출 = 간학문적 / 교과 구분 완전 초월 = 탈학문적.',
+        essayTip: '논술 작성법: "드레이크의 탈학문적 통합은 교과 구분을 완전히 초월하여 실생활 쟁점을 프로젝트나 문제중심학습으로 다룸으로써 패러다임의 전환을 꾀한다."'
+      },
+      {
+        id: 18, type: 'short', page: 'p1', category: '통합 교육과정',
+        q: '드레이크가 제시한 교육과정 통합의 3대 원리(중요성의 원리, □□□의 원리, 적합성의 원리) 중 목표와 수업전략의 부합을 뜻하는 원리는?',
+        validAnswers: ['일관성의 원리', '일관성', '일관성의원리'],
+        tip: '통합 3원리: 중요성(지적내용), 일관성(목표-전략 부합), 적합성(학습자 수준/개성).',
+        essayTip: '논술 작성법: "통합 교육과정 설계 시 일관성의 원리를 준수하여 통합 단원의 내용과 활동이 설정된 단원 목표를 달성할 수 있도록 수업 전략과 유기적으로 일치되어야 한다."'
+      },
+
+      // ==================== [PAGE 2: 조직원리 및 개발모형] ====================
+      {
+        id: 19, type: 'short', page: 'p2', category: '수평적 조직원리',
+        q: '특정 시점에 학생들이 경험해야 할 내용의 폭과 깊이 및 인지·정의·행동적 학습 영역의 범위를 뜻하는 조직 원리는?',
+        validAnswers: ['범위', '스코프', 'Scope', 'scope'],
+        tip: '특정 시점의 폭과 깊이 = 범위(Scope).',
+        essayTip: '논술 작성법: "범위(Scope)는 교육과정에서 가르칠 교육적 경험의 폭과 깊이를 결정하는 수평적 조직 원리이다."'
+      },
+      {
+        id: 20, type: 'choice', page: 'p2', category: '수평적 조직원리',
+        q: '지식을 하나의 유기적 전체로 이해하도록 여러 교육과정 요소 간의 수평적 상호관련성을 밀접하게 맺어주는 원리는?',
+        options: ['통합성 (Integration)', '계속성 (Continuity)', '계열성 (Sequence)', '수직적 연계성'],
+        answer: 0,
+        tip: '수평적 요소 간 유기적 결합 = 통합성.',
+        essayTip: '논술 작성법: "통합성은 지식이 분절되지 않고 하나의 통합된 실체로 이해될 수 있도록 교육과정 요소들을 수평적으로 연계시키는 원리이다."'
+      },
+      {
+        id: 21, type: 'short', page: 'p2', category: '수직적 조직원리',
+        q: '학생들이 반드시 습득해야 할 중요한 개념이나 기능을 시간의 경과에 따라 동일한 수준으로 일정 기간 동안 반복시키는 원리는?',
+        validAnswers: ['계속성', '계속성의 원리', 'Continuity', 'continuity'],
+        tip: '시간 경과에 따른 단순 동일 수준 반복 = 계속성.',
+        essayTip: '논술 작성법: "계속성은 핵심 개념과 기능을 교육과정 전반에 걸쳐 지속적으로 반복 경험하게 함으로써 학습의 정착을 돕는 수직적 조직 원리이다."'
+      },
+      {
+        id: 22, type: 'choice', page: 'p2', category: '수직적 조직원리',
+        q: '누적적·계속적 학습을 촉진하기 위하여 교육내용을 단순에서 복잡, 구체에서 개념 등으로 점진적으로 심화·확대 배열하는 원리는?',
+        options: ['계열성 (Sequence)', '계속성 (Continuity)', '통합성 (Integration)', '범위 (Scope)'],
+        answer: 0,
+        tip: '폭과 깊이의 점진적 심화·확대 배열 = 계열성.',
+        essayTip: '논술 작성법: "계열성은 이전 학습 경험에 너비와 깊이를 더해가며 나선형으로 확대·심화되도록 순서를 배열하는 원리이다."'
+      },
+      {
+        id: 23, type: 'short', page: 'p2', category: '수직적 연계성',
+        q: '이전 학습의 종결점이 후속 학습의 출발점과 긴밀히 맞물려 선행조건을 보장하도록 교육내용을 조직하는 연계성의 명칭은?',
+        validAnswers: ['수직적 연계성', '수직적연계성', '수직적 연계', 'Vertical articulation'],
+        tip: '이전 학습의 끝과 다음 학습의 시작이 매끄럽게 연결됨 = 수직적 연계성.',
+        essayTip: '논술 작성법: "수직적 연계성이란 후속 학습의 출발점이 이전 학습의 종결점과 매끄럽게 맞물리도록 하여 선수학습과 후속학습 간의 단절을 방지하는 원리이다."'
+      },
+      {
+        id: 24, type: 'short', page: 'p2', category: '수평적 연계성',
+        q: '동일 학년 내에서 동시에 학습하는 유사 교과 내용들 간에 동일한 수준과 난이도를 유지하도록 맞추는 연계성의 명칭은?',
+        validAnswers: ['수평적 연계성', '수평적연계성', '수평적 연계', 'Horizontal articulation'],
+        tip: '동일 학년 내 유사 교과 내용 간 난이도/수준 일치 = 수평적 연계성.',
+        essayTip: '논술 작성법: "수평적 연계성은 동일 학년의 유사 교과목 간 내용 수준과 진도를 조율하여 학습의 일관성과 상승효과를 도모하는 것이다."'
+      },
+      {
+        id: 25, type: 'choice', page: 'p2', category: '타일러 개발모형',
+        q: '타일러(Tyler)의 합리적 선형 개발모형 4단계 절차를 나타내는 핵심 두문자는?',
+        options: ['목선조평 (목표설정 → 경험선정 → 경험조직 → 평가)', '상목프판평', '바수학', '강숙설'],
+        answer: 0,
+        tip: '타일러 4단계: [목·선·조·평].',
+        essayTip: '논술 작성법: "타일러는 교육과정 개발을 목표설정, 학습경험선정, 학습경험조직, 평가의 4단계 선형적 체계로 구조화하였다."'
+      },
+      {
+        id: 26, type: 'short', page: 'p2', category: '타일러 개발모형',
+        q: '타일러가 잠정적 교육목표를 도출할 때 연구해야 한다고 제시한 3대 원천의 두문자(학·□·교)에서 가운데 글자가 가리키는 원천은?',
+        validAnswers: ['사회', '현대사회', '현대 사회', '사회생활'],
+        tip: '잠정목표 3원천: [학·사·교](학습자 연구, 현대 사회생활 연구, 교과전문가의 견해).',
+        essayTip: '논술 작성법: "타일러는 잠정적 목표를 설정할 때 학습자의 요구, 현대 사회의 필요, 교과 전문가의 제안이라는 세 가지 원천을 종합적으로 분석해야 한다고 보았다."'
+      },
+      {
+        id: 27, type: 'short', page: 'p2', category: '타일러 개발모형',
+        q: '타일러가 잠정적 목표를 여과하여 최종 교육목표를 확정하기 위해 사용한 2개의 체(Screen)를 뜻하는 두문자(철·심)의 두 학문은?',
+        validAnswers: ['교육철학, 학습심리학', '교육철학과 학습심리학', '교육철학,학습심리학', '철학, 심리학'],
+        tip: '최종 목표 스크린: [철·심] (가치관을 거르는 교육철학 + 발달가능성을 거르는 학습심리학).',
+        essayTip: '논술 작성법: "타일러는 잠정적 목표를 교육철학(가치 판단의 기준)과 학습심리학(학습 가능성 및 발달 수준)이라는 두 개의 체로 걸러 최종 교육목표를 설정하였다."'
+      },
+      {
+        id: 28, type: 'choice', page: 'p2', category: '타일러 개발모형',
+        q: '타일러의 학습경험 선정 원리 중 "학생이 목표가 요구하는 행동을 직접 스스로 실행해 볼 수 있는 환경을 주어야 한다"는 원리는?',
+        options: ['기회의 원리', '만족의 원리', '가능성의 원리', '다성과의 원리'],
+        answer: 0,
+        tip: '직접 그 행동을 해볼 수 있는 기회 제공 = 기회의 원리.',
+        essayTip: '논술 작성법: "기회의 원리란 교육목표가 진술하는 행동을 학습자가 실제로 스스로 수행해 볼 수 있는 충분한 기회를 제공해야 한다는 학습경험 선정의 원칙이다."'
+      },
+      {
+        id: 29, type: 'short', page: 'p2', category: '타바 개발모형',
+        q: '타바(Taba)의 단원 개발모형은 중앙 집중적 하향식 개발이 아니라 교사가 단원 개발에서 출발한다는 점에서 어떤 모형이라 불리는가?',
+        validAnswers: ['교사 중심 모형', '풀뿌리 모형', '교사중심 모형', '풀뿌리모형', '귀납적 모형', 'grassroots model'],
+        tip: '타바 모형의 별칭: 교사 중심 모형 / 풀뿌리 개발 모형 / 귀납적 모형.',
+        essayTip: '논술 작성법: "타바의 단원 개발모형은 수업을 직접 담당하는 교사가 학습자 요구를 진단하여 단원을 개발하는 상향식 풀뿌리(귀납적) 모형이다."'
+      },
+      {
+        id: 30, type: 'short', page: 'p2', category: '타바 개발모형',
+        q: '타바 모형의 첫 번째 단계인 시험적 교수·학습단원 구성 8단계를 나타내는 두문자([요목 내선조 학선조 □□])에서 마지막 두 글자는?',
+        validAnswers: ['평균', '평가, 균형', '평가, 균형과 계열성 검증'],
+        tip: '타바 시험단원 구성 8단계: [요목 내선조 학선조 평균] (요구진단-목표-내용선정/조직-경험선정/조직-평가-균형계열검증).',
+        essayTip: '논술 작성법: "타바 모형은 요구진단에서 시작하여 평가 및 균형·계열성 검증까지 교사가 단원을 정교화하는 구체적 처방을 제공한다."'
+      },
+      {
+        id: 31, type: 'short', page: 'p2', category: '스킬벡 SBCD',
+        q: '스킬벡(Skilbeck)의 학교중심 교육과정 개발모형(SBCD) 5단계의 올바른 절차를 나타내는 두문자는?',
+        validAnswers: ['상목프판평', '상·목·프·판·평'],
+        tip: '스킬벡 5단계: [상·목·프·판·평] (상황분석 → 목표설정 → 프로그램구성 → 판단실행 → 모니터링·평가).',
+        essayTip: '논술 작성법: "스킬벡의 학교중심 교육과정 개발모형(SBCD)은 학교의 특수한 외적·내적 상황분석에서 출발하여 개방적이고 상호작용적인 교육과정 편성을 가능케 한다."'
+      },
+      {
+        id: 32, type: 'choice', page: 'p2', category: '스킬벡 SBCD',
+        q: '스킬벡의 상황분석 요인 중 "학교의 내적 요인"에 해당하는 것은?',
+        options: [
+          '교사의 가치관·태도·경험 및 강약점',
+          '사회·문화적 변화와 사회적 기대',
+          '교육부 및 시·도 교육청의 지침과 정책 권고',
+          '변화하는 학문 교과의 본질'
+        ],
+        answer: 0,
+        tip: '내적 요인: 교사의 가치관/태도, 학생의 적성/능력, 학교의 물리적 환경 및 정치 구조.',
+        essayTip: '논술 작성법: "스킬벡 모형에서 교사의 교육관, 학생의 학습 능력, 학교 풍토는 내적 요인에 해당하며, 이는 학교 맞춤형 교육과정의 토대가 된다."'
+      },
+      {
+        id: 33, type: 'short', page: 'p2', category: '백워드 설계모형',
+        q: '위긴스와 맥타이(Wiggins & McTighe)의 백워드(Backward) 설계 절차 3단계의 두문자는?',
+        validAnswers: ['바수학', '바·수·학'],
+        tip: '백워드 3단계: [바·수·학] (바람직한 결과 확인 → 수용할 만한 증거 결정 → 학습경험 및 수업 계획).',
+        essayTip: '논술 작성법: "백워드 설계는 성취기준에 따른 [바람직한 결과 확인(1단계)], 평가 루브릭을 수립하는 [수용할 만한 증거 결정(2단계)], 수업활동을 구성하는 [학습경험 계획(3단계)]의 역방향으로 전개된다."'
+      },
+      {
+        id: 34, type: 'short', page: 'p2', category: '백워드 설계모형',
+        q: '백워드 설계에서 "학습자가 세부 사실을 모두 잊어버려도 남아있는 가장 포괄적인 수준의 일반화이자 전이력이 높은 핵심 개념"을 무엇이라 하는가?',
+        validAnswers: ['영속적 이해', '영속적이해', 'Enduring understanding', 'enduring understanding'],
+        tip: '세부 사실 망각 후에도 지속되는 핵심 원리 = 영속적 이해.',
+        essayTip: '논술 작성법: "영속적 이해는 학습자가 개별적 사실들을 잊은 후에도 마음에 남아 새로운 맥락에 적용할 수 있는 가장 본질적인 핵심 아이디어이다."'
+      },
+      {
+        id: 35, type: 'choice', page: 'p2', category: '백워드 설계모형',
+        q: '백워드 설계의 영속적 이해 6가지 측면(설명, 해석, 적용, 관점, 공감, 자기지식) 중 "자신의 무지를 알고 자신의 편견과 사고 습관을 성찰하는 능력"은?',
+        options: ['자기지식 (Self-knowledge)', '관점 (Perspective)', '공감 (Empathy)', '해석 (Interpretation)'],
+        answer: 0,
+        tip: '자신의 무지를 자각하고 편견을 성찰함 = 자기지식.',
+        essayTip: '논술 작성법: "백워드 모형의 자기지식은 자신의 사고 과정과 한계를 스스로 메타인지적으로 성찰하여 편견을 극복하는 고차적 이해 능력이다."'
+      },
+      {
+        id: 36, type: 'short', page: 'p2', category: '백워드 설계모형',
+        q: '백워드 3단계 학습경험 계획(WHERETO) 중 "T"가 가리키는 의미(학습자의 필요·흥미·능력에 맞춤)의 영단어는?',
+        validAnswers: ['Tailor', 'tailor', '개별화', '테일러'],
+        tip: 'WHERETO의 T = Tailor (학습자의 요구·흥미에 맞춘 개별화).',
+        essayTip: '논술 작성법: "WHERETO 요소 중 Tailor(개별화)는 학생들의 다양한 출발점과 학습 속도에 맞추어 수업을 맞춤형으로 조정하는 단계이다."'
+      },
+
+      // ==================== [PAGE 3: 재개념화 및 실행·재구성] ====================
+      {
+        id: 37, type: 'short', page: 'p3', category: '워커 숙의모형',
+        q: '워커(Walker)의 자연주의적 교육과정 개발 모형(숙의 모형)의 3단계 전개 순서를 나타내는 두문자는?',
+        validAnswers: ['강숙설', '강·숙·설'],
+        tip: '워커 자연주의 모형: [강·숙·설] (강령 → 숙의 → 설계).',
+        essayTip: '논술 작성법: "워커의 숙의모형은 개발자들의 신념과 이론을 공유하는 [강령], 다양한 대안을 토론하고 합의를 모색하는 [숙의], 이를 구체화하는 [설계]의 과정을 거쳐 교육과정이 현실적으로 개발된다고 본다."'
+      },
+      {
+        id: 38, type: 'choice', page: 'p3', category: '아이즈너 예술적 모형',
+        q: '아이즈너(Eisner)의 목표 유형 중 "문제와 해결의 조건은 명확하게 주어지지만 해결책이 다양하게 열려있는 목표"는?',
+        options: ['문제해결목표', '행동목표', '표현적 결과 (표현적 목표)', '기능적 목표'],
+        answer: 0,
+        tip: '조건은 명확하나 해결책은 여러 가지 = 문제해결목표. 정해진 목표 없이 도출 = 표현적 결과.',
+        essayTip: '논술 작성법: "아이즈너의 문제해결목표는 정형화된 정답 대신 학습자가 주어진 조건 안에서 독창적인 해결책을 다각도로 모색하도록 요구한다."'
+      },
+      {
+        id: 39, type: 'short', page: 'p3', category: '아이즈너 예술적 모형',
+        q: '아이즈너가 제시한 목표 유형 중 "목표를 미리 정하지 않고, 어떤 활동을 하거나 끝마친 후 도출되는 바람직한 결과"를 무엇이라 하는가?',
+        validAnswers: ['표현적 결과', '표현적결과', '표현적 목표', 'expressive outcomes'],
+        tip: '사전 정의 X, 활동 중/후 도출되는 가치 = 표현적 결과.',
+        essayTip: '논술 작성법: "표현적 결과는 행동을 사전에 구체화하지 않고 풍부한 교육적 활동 속에서 생성되는 예기치 않은 교육적 결실을 긍정하는 목표 유형이다."'
+      },
+      {
+        id: 40, type: 'short', page: 'p3', category: '아이즈너 예술적 모형',
+        q: '교사가 교육목표와 교육내용을 학생들에게 적합하고 의미 있는 형태로 창의적으로 변형하여 학습기회를 창출하는 전문적 능력을 무엇이라 하는가?',
+        validAnswers: ['교육적 상상력', '교육적상상력', 'educational imagination'],
+        tip: '수업 형태로 의미 있게 변형하는 능력 = 교육적 상상력.',
+        essayTip: '논술 작성법: "교육적 상상력은 교사가 형식적 교육과정 목표와 내용을 학생들의 발달 수준과 흥미에 맞는 다채로운 수업 활동으로 변형해내는 전문적 능력이다."'
+      },
+      {
+        id: 41, type: 'short', page: 'p3', category: '아이즈너 예술적 모형',
+        q: '학생들의 다양한 성취 형태들 사이의 미묘한 질적 차이를 감지해내는 교사의 개인적 안목을 무엇이라 하는가?',
+        validAnswers: ['교육적 감식안', '교육적감식안', '교육 감식안', 'educational connoisseurship'],
+        tip: '미묘한 질적 차이를 감지하는 안목 = 교육적 감식안.',
+        essayTip: '논술 작성법: "교육적 감식안은 학생의 학습 결과물에 나타난 미묘한 질적 차이와 예술적 가치를 감지하는 교사의 사적(개인적) 전문성이다."'
+      },
+      {
+        id: 42, type: 'choice', page: 'p3', category: '아이즈너 예술적 모형',
+        q: '교사가 교육적 감식안으로 감지한 학생 성취의 미묘한 차이를 공적으로 언어화하여 표현하고 소통하는 예술적 행위는?',
+        options: ['교육비평 (Educational Criticism)', '참평가', '교육적 상상력', '거미집 조직'],
+        answer: 0,
+        tip: '감식안의 공적 언어화 = 교육비평.',
+        essayTip: '논술 작성법: "교육비평은 교육적 감식안을 통해 파악한 통찰을 대중과 공유할 수 있도록 공적인 언어로 기술, 해석, 평가하는 행위이다."'
+      },
+      {
+        id: 43, type: 'short', page: 'p3', category: '아이즈너 예술적 모형',
+        q: '학생이 실제 삶에서 필요로 하는 실제적 문제해결 능력을 획득했는지를 직접 점검하는 평가 방식을 무엇이라 하는가?',
+        validAnswers: ['참평가', '참 평가', '진정한 평가', 'authentic assessment'],
+        tip: '실생활 문제해결력 측정 = 참평가 (Authentic Assessment).',
+        essayTip: '논술 작성법: "참평가는 실생활의 맥락과 직결된 실제적 과제를 해결하도록 요구함으로써 고차원적 사고력과 적용력을 종합 점검한다."'
+      },
+      {
+        id: 44, type: 'short', page: 'p3', category: '파이나 실존적 재개념화',
+        q: '파이나(Pinar)가 제안한 교육과정의 어원으로, 정해진 경주로(Course)가 아니라 "경주로를 달리는 개인적 경험"에 초점을 맞추는 개념어는?',
+        validAnswers: ['쿠레레', 'Currere', 'currere'],
+        tip: '달리는 개인적 경험 = 쿠레레 (Currere).',
+        essayTip: '논술 작성법: "파이나는 교육과정을 명사화된 트랙이 아닌 동사형인 [쿠레레(Currere)]로 재개념화하여 개인이 학습 과정에서 겪는 실존적 경험과 자기반성을 강조하였다."'
+      },
+      {
+        id: 45, type: 'choice', page: 'p3', category: '파이나 실존적 재개념화',
+        q: '파이나의 쿠레레 방법론 4단계(회귀 → 진보 → 분석 → 종합) 중 "자유연상을 통해 자신의 미래 모습을 상상해내는 단계"는?',
+        options: ['진보 (Progressive)', '회귀 (Regressive)', '분석 (Analytic)', '종합 (Synthetical)'],
+        answer: 0,
+        tip: '미래 모습 상상 = 진보 (과거 회상 = 회귀).',
+        essayTip: '논술 작성법: "쿠레레 방법론의 진보 단계는 미래의 이상적인 자기 모습을 자유연상으로 그리며 현재 삶의 발전 방향을 모색하는 실존적 성찰 단계이다."'
+      },
+      {
+        id: 46, type: 'short', page: 'p3', category: '파이나 자서전적 방법',
+        q: '파이나의 자서전적 방법 3단계(자신의 교육경험 표현 → 교육경험을 비판적으로 성찰 → □□의 교육경험 분석)의 마지막 단계 대상은?',
+        validAnswers: ['타인', '타인의 교육경험', '다른 학생', '타인의 교육경험 분석'],
+        tip: '자서전적 방법: 자신의 경험 표현 → 비판적 성찰 → 타인의 교육경험 분석.',
+        essayTip: '논술 작성법: "자서전적 방법의 3단계는 타인의 교육경험을 함께 분석함으로써 개인의 경험을 넘어 교육 구조가 지닌 보편적 가정을 비판적으로 인식하고 공감대를 형성하는 단계이다."'
+      },
+      {
+        id: 47, type: 'choice', page: 'p3', category: '교육과정 실행모형',
+        q: '스나이더(Snyder)의 교육과정 실행 모형 중 "교사와 학생이 교수·학습 장면에서 주관적 느낌과 경험에 따라 교육과정을 함께 구성하는 개발자 역할을 맡는 관점"은?',
+        options: ['생성적 관점 (Enactment Perspective)', '상호적응적 관점 (Mutual Adaptation)', '충실도 관점 (Fidelity)', '기술적 관점'],
+        answer: 0,
+        tip: '교사·학생이 현장에서 함께 만들어감 = 생성적 관점.',
+        essayTip: '논술 작성법: "생성적 관점에서 교육과정은 외부 문서가 아니라 수업 현장에서 교사와 학생이 상호작용하며 실시간으로 창조해 나가는 경험 그 자체이다."'
+      },
+      {
+        id: 48, type: 'short', page: 'p3', category: '교육과정 실행모형',
+        q: '스나이더의 실행 관점 중 교사가 학교의 환경적 맥락과 시대적·정치적 상황에 맞추어 계획된 교육과정을 능동적으로 조율·수정하는 관점은?',
+        validAnswers: ['상호적응적 관점', '상호적응 관점', '상호적응적', 'mutual adaptation'],
+        tip: '상황과 맥락에 맞추어 조정·변화 = 상호적응적 관점.',
+        essayTip: '논술 작성법: "상호적응적 관점은 계획된 교육과정이 학교 현실 및 교사의 역량과 끊임없이 타협하고 조정되는 상호작용 과정으로 교육과정 실행을 규정한다."'
+      },
+      {
+        id: 49, type: 'short', page: 'p3', category: '홀 CBAM 모형',
+        q: '홀(Hall et al.)의 교사 관심에 기초한 채택모형(CBAM)에서 교사의 관심 3수준(개인 관심 수준, □□ 관심 수준, 결과 관심 수준)의 빈칸은?',
+        validAnswers: ['업무', '업무 관심 수준', '업무관심수준'],
+        tip: 'CBAM 3수준: ①개인 관심(0,1,2) → ②업무 관심(3운영) → ③결과 관심(4,5,6).',
+        essayTip: '논술 작성법: "CBAM 모형의 업무 관심 수준(3단계 운영)은 교사가 새 교육과정의 일정 관리, 수업 준비 등 실행에 필요한 시간과 자료 운용에 몰두하는 단계이다."'
+      },
+      {
+        id: 50, type: 'choice', page: 'p3', category: '홀 CBAM 모형',
+        q: '홀의 CBAM 모형이 주는 교육행정적·장학적 시사점으로 가장 적절하지 않은 것은?',
+        options: [
+          '새 교육과정 도입 즉시 모든 교사가 최고 수준의 결과 관심에 도달하도록 일괄 강제 연수를 실시해야 한다.',
+          '교사의 관심 정도를 정확히 진단하여 수준에 맞는 맞춤형 정보를 제공해야 한다.',
+          '교사의 실행 수준이 점진적으로 상승할 수 있도록 개발과 실행 간의 충분한 시차를 허용해야 한다.',
+          '교육과정 실행의 성패는 교사의 심리적 관심과 실행 능력에 직결되어 있음을 명료화했다.'
+        ],
+        answer: 0,
+        tip: 'CBAM 시사점: 일괄 강제가 아니라 관심 단계에 맞춘 맞춤형 연수 및 시간적 여유 부여.',
+        essayTip: '논술 작성법: "CBAM 모형은 교사들이 혁신을 수용하기까지 단계적 관심과 실행 수준을 거치므로, 단계별 맞춤형 연수 지원과 숙의를 위한 시간적 배려가 필수적임을 시사한다."'
+      },
+      {
+        id: 51, type: 'short', page: 'p3', category: '던킨과 비들 모형',
+        q: '던킨과 비들(Dunkin & Biddle)의 수업과정 연구모형 중 "교수자의 지적 능력, 교원양성 배경, 인성적 특성"을 가리키는 변인은?',
+        validAnswers: ['전조변인', '전조 변인', 'presage variable'],
+        tip: '교사 고유 특성 = 전조변인.',
+        essayTip: '논술 작성법: "전조변인은 교수자의 교육관, 인성, 전공 역량 등 수업에 임하기 전 교사가 지니고 있는 고유한 특성을 가리킨다."'
+      },
+      {
+        id: 52, type: 'short', page: 'p3', category: '던킨과 비들 모형',
+        q: '던킨과 비들의 변인 중 "학습자의 성향 및 특성, 교실 환경, 학교 및 지역사회의 물리적·사회적 맥락"을 가리키는 변인은?',
+        validAnswers: ['상황변인', '맥락변인', '상황 변인', '맥락 변인', 'context variable'],
+        tip: '학생 특성 및 환경 조건 = 상황변인(맥락변인).',
+        essayTip: '논술 작성법: "상황변인(맥락변인)은 학생의 특성과 학교 및 지역사회의 여건을 포함하며, 교실 내 상호작용 과정에 직접적인 영향을 미친다."'
+      },
+      {
+        id: 53, type: 'choice', page: 'p3', category: '교육과정 압축',
+        q: '렌줄리(Renzulli)의 교육과정 압축(Compacting)에서 이미 학습 내용을 숙달한 영재 학생에게 또래와 함께 공부하되 도전적 심층 과제를 주는 전략은?',
+        options: ['심화 (Enrichment)', '속진 (Acceleration)', '분과화', '단원 대체'],
+        answer: 0,
+        tip: '더 빠르게 나아가는 것 = 속진 / 수준 높은 다양한 과제를 부여하는 것 = 심화.',
+        essayTip: '논술 작성법: "렌줄리의 심화 전략은 기본 학습을 조기 마스터한 학생에게 또래와의 협력 관계를 유지시키며 심도 있는 탐구 과제를 부여하여 잠재력을 극대화한다."'
+      },
+      {
+        id: 54, type: 'short', page: 'p3', category: '교육과정 압축',
+        q: '렌줄리의 교육과정 압축 전략 중 "상위 학습자가 동일한 교육과정을 보통의 학생들보다 더 빠른 속도로 이수하는 방식"은?',
+        validAnswers: ['속진', '속진제', 'acceleration', 'Acceleration'],
+        tip: '학습 속도를 빠르게 진행 = 속진 (Acceleration).',
+        essayTip: '논술 작성법: "속진은 반복적인 학습의 지루함을 없애고 학생의 높은 학습 속도에 맞추어 상급 과정을 조기 이수하게 하는 압축 전략이다."'
+      },
+
+      // ==================== [PAGE 4: 2015·2022 개정 및 학교제도] ====================
+      {
+        id: 55, type: 'short', page: 'p4', category: '교육과정 재구성 절차',
+        q: '학교 교육과정 재구성 절차 6단계의 순서를 나타내는 핵심 두문자는?',
+        validAnswers: ['분유목내교평', '분·유·목·내·교·평'],
+        tip: '재구성 6단계: [분·유·목·내·교·평] (재구성분석-유형결정-목표재구성-내용재구성-교수방법계획-평가계획).',
+        essayTip: '논술 작성법: "교육과정 재구성은 학생과 학교 여건을 분석(1단계)한 후, 적절한 유형을 결정(2단계)하고, 목표(3)·내용(4)·교수방법(5)·평가(6)를 일관되게 재설계하는 절차를 따른다."'
+      },
+      {
+        id: 56, type: 'short', page: 'p4', category: '교육과정 재구성 분석',
+        q: '교육과정 재구성의 첫 단계인 "재구성을 위한 분석" 3대 대상(교육과정 분석, 학생 특성 분석, □□ 여건 분석)의 빈칸은?',
+        validAnswers: ['학교', '학교 여건', '학교 및 지역사회'],
+        tip: '재구성 3대 분석: 교육과정 분석, 학생의 특성과 수준 분석, 학교 여건 분석.',
+        essayTip: '논술 작성법: "재구성 분석 단계에서는 국가 성취기준뿐 아니라 학생들의 인지·정의적 흥미와 학교 및 지역사회의 가용 자원을 입체적으로 분석해야 한다."'
+      },
+      {
+        id: 57, type: 'choice', page: 'p4', category: '교육과정 재구성 유형',
+        q: '핵심성취기준을 중심으로 교과서 단원 순서를 바꾸거나 일부 내용을 압축·생략·대체하여 가르치는 재구성 방식은?',
+        options: ['교과 내 재구성', '교과 간 재구성', '교과와 창체 연계 재구성', '지역수준 재구성'],
+        answer: 0,
+        tip: '한 교과 안에서 순서 변경, 압축, 대체 = 교과 내 재구성.',
+        essayTip: '논술 작성법: "교과 내 재구성은 단일 교과 내에서 필수 핵심 성취기준을 선별하여 내용을 압축하거나 순서를 조정함으로써 수업의 집중도와 효율을 높인다."'
+      },
+      {
+        id: 58, type: 'short', page: 'p4', category: '교육과정 재구성 유형',
+        q: '국어 시간에 포토에세이 작성법을 익힌 뒤, 지역사회를 탐방하며 촬영한 사진을 토대로 글을 작성하는 식의 재구성 유형은?',
+        validAnswers: ['교과와 창의적 체험활동의 연계를 통한 재구성', '교과와 창체 연계', '교과와 창체 연계를 통한 재구성', '교과와 창의적 체험활동 연계'],
+        tip: '교과 수업 + 자율/봉사/진로 등 창의적 체험활동 = 교과와 창의적 체험활동 연계 재구성.',
+        essayTip: '논술 작성법: "교과와 창의적 체험활동 연계 재구성은 교과 지식을 실제 체험 및 탐방 활동과 유기적으로 결합하여 배움의 실천성과 전이력을 높인다."'
+      },
+      {
+        id: 59, type: 'short', page: 'p4', category: '교육과정 거버넌스',
+        q: '중앙 집중적 국가수준 교육과정에만 전적으로 의존할 때 발생하는 문제점으로, 교사가 교육과정 개발에서 배제되는 현상을 무엇이라 하는가?',
+        validAnswers: ['교사배제 교육과정', '교사배제교육과정', '교사배제', 'teacher-proof curriculum'],
+        tip: '교사가 단순 전달자로 전락함 = 교사배제 교육과정 (Teacher-proof curriculum).',
+        essayTip: '논술 작성법: "국가 교육과정의 획일적 운영은 교사를 수동적 전달자로 전락시키는 [교사배제 교육과정]과 현장의 생동감을 잃게 하는 [교육과정 사소화] 문제를 초래한다."'
+      },
+      {
+        id: 60, type: 'choice', page: 'p4', category: '교육과정 거버넌스',
+        q: '국가수준 교육과정과 단위학교 교육과정 사이에서 "교량적(가교) 역할"을 수행하며 지역의 특수성을 반영하는 교육과정은?',
+        options: ['지역수준 교육과정 (시·도 교육청 지침)', '국가수준 교육과정', '학교수준 교육과정', '학급 교육과정'],
+        answer: 0,
+        tip: '국가수준과 학교수준의 가교 = 지역수준 교육과정.',
+        essayTip: '논술 작성법: "지역수준 교육과정은 국가의 공통적 기준을 지역의 특수성과 결합하여 단위학교에 전달하는 가교 역할을 수행한다."'
+      },
+      {
+        id: 61, type: 'short', page: 'p4', category: '2015 개정 인간상',
+        q: '2015 개정 교육과정의 4대 인간상(자주적인 사람, 창의적인 사람, □□ 있는 사람, 더불어 사는 사람)의 빈칸은?',
+        validAnswers: ['교양', '교양 있는 사람', '교양있는 사람'],
+        tip: '2015 인간상: 자주적인 사람, 창의적인 사람, 교양 있는 사람, 더불어 사는 사람.',
+        essayTip: '논술 작성법: "2015 개정 교육과정은 전인적 성장을 바탕으로 문화적 소양을 갖춘 [교양 있는 사람]과 공동체 의식을 지닌 [더불어 사는 사람]을 길러내고자 한다."'
+      },
+      {
+        id: 62, type: 'choice', page: 'p4', category: '2015 개정 핵심역량',
+        q: '2015 개정 교육과정의 6대 핵심역량에 속하지 않는 것은?',
+        options: ['디지털 코딩 역량', '자기관리 역량', '지식정보처리 역량', '심미적 감성 역량'],
+        answer: 0,
+        tip: '2015 6대 역량: 자기관리, 지식정보처리, 창의적 사고, 심미적 감성, 의사소통, 공동체 역량.',
+        essayTip: '논술 작성법: "2015 개정 교육과정은 지식의 단순 암기를 지양하고 삶의 맥락에서 문제를 해결할 수 있는 6대 핵심역량 함양을 수업의 중심에 둔다."'
+      },
+      {
+        id: 63, type: 'short', page: 'p4', category: '2022 개정 비전',
+        q: '2022 개정 교육과정 총론에서 제시한 교육의 궁극적 지향점(목표)인 인간상 비전은 "포용성과 창의성을 갖춘 □□적인 사람"이다. 빈칸은?',
+        validAnswers: ['주도', '주도적', '주도적인 사람', '주도적인'],
+        tip: '2022 교육목표: [포용성과 창의성을 갖춘 주도적인 사람].',
+        essayTip: '논술 작성법: "2022 개정 교육과정은 급변하는 미래 사회에 대응하기 위해 [포용성과 창의성을 갖춘 주도적인 사람]을 미래 인재상으로 천명하였다."'
+      },
+      {
+        id: 64, type: 'short', page: 'p4', category: '2022 개정 인간상',
+        q: '2022 개정 교육과정에서 2015의 인간상 \'자주적인 사람\'을 자신의 삶과 진로를 능동적으로 개척한다는 의미로 수정한 인간상은?',
+        validAnswers: ['자기주도적인 사람', '자기주도적인사람', '자기주도적 사람'],
+        tip: '2015 자주적인 사람 → 2022 [자기주도적인 사람]으로 수정.',
+        essayTip: '논술 작성법: "2022 개정에서는 학습자의 주체성과 진로 설계 능력을 강조하여 인간상을 [자기주도적인 사람]으로 재정립하였다."'
+      },
+      {
+        id: 65, type: 'short', page: 'p4', category: '2022 개정 핵심역량',
+        q: '2022 개정 교육과정에서 2015의 \'의사소통 역량\'을 타인과의 연대와 협력을 강조하여 발전시킨 핵심역량의 명칭은?',
+        validAnswers: ['협력적 소통 역량', '협력적소통역량', '협력적 소통'],
+        tip: '2015 의사소통 역량 → 2022 [협력적 소통 역량]으로 개편.',
+        essayTip: '논술 작성법: "협력적 소통 역량은 다양한 의견을 경청하고 타인과 조화를 이루며 공동체의 문제를 함께 해결하는 상호작용 능력이다."'
+      },
+      {
+        id: 66, type: 'short', page: 'p4', category: '2022 개정 기초소양',
+        q: '2022 개정 교육과정 총론에서 모든 교과 학습의 기초가 되는 3대 기본 소양(언어 소양, 수리 소양, □□ 소양)의 빈칸은?',
+        validAnswers: ['디지털', '디지털 소양', '디지털소양'],
+        tip: '2022 3대 기초소양: [언어 소양, 수리 소양, 디지털 소양].',
+        essayTip: '논술 작성법: "2022 개정 교육과정은 기초학력 보장을 넘어 미래 문해력을 기르기 위해 [언어, 수리, 디지털 소양]을 모든 교과의 공통 기초소양으로 반영하였다."'
+      },
+      {
+        id: 67, type: 'choice', page: 'p4', category: '교육과정 운영 제도',
+        q: '중학교 과정 중 1~2학기 동안 지식·경쟁 중심 수업을 지양하고 소질과 적성을 기르는 체험활동을 운영하며 과정중심 평가를 실시하는 제도는?',
+        options: ['자유학기제 (자유학년제)', '집중이수제', '블록타임제', '고교학점제'],
+        answer: 0,
+        tip: '중학교 진로탐색 및 과정중심 평가 = 자유학기제.',
+        essayTip: '논술 작성법: "자유학기제는 지필평가 부담에서 벗어나 학생 참여형 수업과 과정중심 평가를 통해 진로 탐색과 자기주도적 학습력을 신장시킨다."'
+      },
+      {
+        id: 68, type: 'short', page: 'p4', category: '교육과정 운영 제도',
+        q: '특정한 과목의 시수를 특정 학기나 학년에 집중적으로 편성하여 학습 효율을 높이는 제도의 명칭은?',
+        validAnswers: ['집중이수제', '집중이수', '집중 이수제'],
+        tip: '시수를 한 학기/학년에 몰아서 이수 = 집중이수제.',
+        essayTip: '논술 작성법: "집중이수제는 수업의 집중도를 높일 수 있으나, 단기간 학습 분량 과다로 학생의 발달 단계와 불일치할 수 있는 단점을 유의해야 한다."'
+      },
+      {
+        id: 69, type: 'short', page: 'p4', category: '교육과정 운영 제도',
+        q: '기존의 45~50분 단위수업을 2~3시간 연속 운영하거나 70~100분 등 탄력적으로 묶어 수업 흐름의 단절 없이 심층 진행하는 방식은?',
+        validAnswers: ['블록타임제', '블록 타임제', '블록타임', 'block time'],
+        tip: '단위시간 연속 묶음 = 블록타임제.',
+        essayTip: '논술 작성법: "블록타임제는 수업 시간의 탄력적 연속 운영을 통해 실험, 토론, 프로젝트 등 심층적인 학생 참여형 탐구 수업을 가능하게 한다."'
+      },
+      {
+        id: 70, type: 'short', page: 'p4', category: '고교학점제',
+        q: '고교학점제에서 학생이 고등학교를 졸업하기 위해 3년간 반드시 취득·누적해야 하는 기준 총 학점 수는?',
+        validAnswers: ['192학점', '192 학점', '192'],
+        tip: '고교학점제 졸업 이수 기준: [192학점].',
+        essayTip: '논술 작성법: "고교학점제는 학생이 기초 소양을 바탕으로 192학점을 누적 이수함으로써 주도적으로 진로와 학업을 설계할 수 있도록 돕는다."'
+      },
+      {
+        id: 71, type: 'choice', page: 'p4', category: '고교학점제',
+        q: '고교학점제의 전면 도입에 따라 학교와 교사에게 요구되는 핵심적인 변화상으로 옳은 것은?',
+        options: [
+          '교사는 단순 지식 전달자를 넘어 학생 개개인의 성장을 지원하는 진로·학업설계 지도 전문가가 된다.',
+          '학교 공간은 교원 행정실 중심으로 통제성을 강화해야 한다.',
+          '학생들은 학교가 사전에 획일적으로 지정한 시간표에만 출석해야 한다.',
+          '성취평가제를 폐지하고 모든 과목을 상대평가 석차 9등급제로 환원한다.'
+        ],
+        answer: 0,
+        tip: '고교학점제에서 교사는 학생 진로·학습 설계 전문가이자 맞춤형 성장 지원자.',
+        essayTip: '논술 작성법: "고교학점제 하에서 교사는 단편적 지식 전달자에서 탈피하여 학습자의 진로 설계를 지원하고 최소 성취수준을 보장하는 교수·학습 전문가로 변모해야 한다."'
+      },
+      {
+        id: 72, type: 'short', page: 'p4', category: '고교학점제',
+        q: '고교학점제 운영을 위해 단위학교가 교실을 개방화, 자율화, 유연화된 배움 공간으로 혁신하는 것을 학교의 무엇이라 하는가?',
+        validAnswers: ['학교 공간 조성', '학교공간조성', '학교 공간 혁신', '학교공간혁신'],
+        tip: '가변형 교실, 홈베이스, 자율학습실 등 유연한 배움터 구축 = 학교 공간 조성(혁신).',
+        essayTip: '논술 작성법: "학교 공간 조성을 통해 유연하고 개방적인 학습 환경을 구축함으로써 학생 개별화 선택 수업과 융합 프로젝트 활동을 원활히 지원할 수 있다."'
+      }
+    ];
+
+    // 애플리케이션 상태
+    let activeList = [];
+    let curIdx = 0;
+    let score = 0;
+    let isAnswered = false;
+    let wrongBank = [];
+    let currentFilter = 'all';
+
+    // 문자열 공백 및 특수문자 정규화 함수 (단답형 채점 관대화)
+    function normalizeStr(str) {
+      if (!str) return '';
+      return str.toString()
+        .toLowerCase()
+        .replace(/[\s\-_,·•\(\)\[\]\/]/g, '')
+        .trim();
+    }
+
+    // Fisher-Yates 무작위 셔플
+    function shuffle(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    // 퀴즈 초기화 및 셔플 로딩
+    function initQuiz(filterKey) {
+      currentFilter = filterKey;
+      let pool = [];
+
+      if (filterKey === 'all') {
+        pool = [...masterDB];
+      } else if (filterKey === 'type-short') {
+        pool = masterDB.filter(item => item.type === 'short');
+      } else if (filterKey === 'type-choice') {
+        pool = masterDB.filter(item => item.type === 'choice');
+      } else if (filterKey === 'wrong') {
+        pool = masterDB.filter(item => wrongBank.includes(item.id));
+        if (pool.length === 0) {
+          alert('현재 등록된 오답이 없습니다. 먼저 문제를 풀어보세요!');
+          setFilterActive('all');
+          initQuiz('all');
+          return;
+        }
+      } else {
+        pool = masterDB.filter(item => item.page === filterKey);
+      }
+
+      // 문제 순서 무작위 셔플
+      // 객관식 문제의 경우 보기 순서도 정답 인덱스를 보존하며 무작위 셔플
+      activeList = shuffle(pool).map(item => {
+        if (item.type === 'choice') {
+          const original = item.options.map((t, i) => ({ text: t, isAns: i === item.answer }));
+          const shuffled = shuffle(original);
+          return {
+            ...item,
+            options: shuffled.map(o => o.text),
+            answer: shuffled.findIndex(o => o.isAns)
+          };
+        }
+        return { ...item };
+      });
+
+      curIdx = 0;
+      score = 0;
+      isAnswered = false;
+
+      document.getElementById('status-panel').style.display = 'flex';
+      document.getElementById('quiz-card').style.display = 'flex';
+      document.getElementById('result-card').style.display = 'none';
+
+      renderQuestion();
+    }
+
+    // 현재 문제 화면 렌더링
+    function renderQuestion() {
+      isAnswered = false;
+      const q = activeList[curIdx];
+
+      // 상단 지표
+      const typeBadge = document.getElementById('q-type-badge');
+      if (q.type === 'short') {
+        typeBadge.className = 'type-badge short';
+        typeBadge.innerText = '📝 단답 기입형';
+      } else {
+        typeBadge.className = 'type-badge choice';
+        typeBadge.innerText = '🔘 4지 선다형';
+      }
+
+      document.getElementById('q-category').innerText = q.category;
+      document.getElementById('q-progress-text').innerText = `문항 ${curIdx + 1} / ${activeList.length}`;
+      document.getElementById('score-text').innerText = score;
+
+      const pct = (curIdx / activeList.length) * 100;
+      document.getElementById('progress-fill').style.width = `${pct}%`;
+
+      // 문제 텍스트
+      document.getElementById('q-title').innerHTML = `<span class="q-num">Q${curIdx + 1}.</span> ${q.q}`;
+
+      const optionsBox = document.getElementById('options-box');
+      const shortBox = document.getElementById('short-input-box');
+      const shortInput = document.getElementById('short-input');
+
+      // 피드백 박스 리셋
+      document.getElementById('feedback-box').style.display = 'none';
+      document.getElementById('btn-next').innerText = (curIdx === activeList.length - 1) ? '최종 결과 확인 →' : '다음 문제 →';
+
+      if (q.type === 'choice') {
+        shortBox.style.display = 'none';
+        optionsBox.style.display = 'flex';
+        optionsBox.innerHTML = '';
+        const prefixes = ['①', '②', '③', '④'];
+
+        q.options.forEach((optText, idx) => {
+          const btn = document.createElement('button');
+          btn.className = 'option-btn';
+          btn.innerHTML = `<span class="option-prefix">${prefixes[idx]}</span><span>${optText}</span>`;
+          btn.onclick = () => checkChoiceAnswer(idx);
+          optionsBox.appendChild(btn);
+        });
+      } else {
+        // 단답형 모드
+        optionsBox.style.display = 'none';
+        shortBox.style.display = 'flex';
+        shortInput.disabled = false;
+        shortInput.value = '';
+        shortInput.focus();
+      }
+    }
+
+    // 객관식 정답 검증
+    function checkChoiceAnswer(selectedIdx) {
+      if (isAnswered) return;
+      isAnswered = true;
+
+      const q = activeList[curIdx];
+      const isCorrect = (selectedIdx === q.answer);
+      const allBtns = document.getElementById('options-box').querySelectorAll('.option-btn');
+
+      allBtns.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === q.answer) {
+          btn.classList.add('correct');
+        } else if (idx === selectedIdx) {
+          btn.classList.add('wrong');
+        }
+      });
+
+      showFeedback(isCorrect, q.options[q.answer]);
+    }
+
+    // 단답형 정답 검증
+    function checkShortAnswer() {
+      if (isAnswered) return;
+      const shortInput = document.getElementById('short-input');
+      const userInput = shortInput.value.trim();
+
+      if (!userInput) {
+        alert('답안을 입력해주세요!');
+        shortInput.focus();
+        return;
+      }
+
+      isAnswered = true;
+      shortInput.disabled = true;
+
+      const q = activeList[curIdx];
+      const normUser = normalizeStr(userInput);
+      const isCorrect = q.validAnswers.some(ans => normalizeStr(ans) === normUser);
+
+      showFeedback(isCorrect, q.validAnswers[0]);
+    }
+
+    // 공통 피드백 출력 (논술 모범 답안 문장 포함)
+    function showFeedback(isCorrect, displayAnswer) {
+      const q = activeList[curIdx];
+      const feedbackBox = document.getElementById('feedback-box');
+      const feedbackHeader = document.getElementById('feedback-header');
+      const feedbackBody = document.getElementById('feedback-body');
+
+      feedbackBox.style.display = 'block';
+
+      if (isCorrect) {
+        score++;
+        document.getElementById('score-text').innerText = score;
+        feedbackBox.className = 'feedback-card is-correct';
+        feedbackHeader.innerHTML = '✔ 정답입니다! 정확하고 신속하게 인출되었습니다.';
+      } else {
+        feedbackBox.className = 'feedback-card is-wrong';
+        feedbackHeader.innerHTML = '✖ 오답입니다! 핵심 키워드와 논술 문장을 복습하세요.';
+
+        if (!wrongBank.includes(q.id)) {
+          wrongBank.push(q.id);
+          updateWrongBadge();
+        }
+      }
+
+      feedbackBody.innerHTML = `
+        <div style="font-weight: 700; color: #0f172a;">
+          정답 키워드: <span style="color: #3730a3; font-weight: 800;">${displayAnswer}</span>
+        </div>
+        <div style="font-size: 12.5px; color: #475569;">
+          <b style="color: #b45309;">💡 암기 팁 & 두문자:</b> ${q.tip}
+        </div>
+        <div class="essay-box">
+          <div style="font-weight: 800; margin-bottom: 2px;">✍ [교육학 논술 서술 모범 문장]:</div>
+          <div>${q.essayTip}</div>
+        </div>
+      `;
+    }
+
+    // 단답형 엔터키 및 클릭 이벤트
+    document.getElementById('btn-submit-short').onclick = checkShortAnswer;
+    document.getElementById('short-input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (!isAnswered) {
+          checkShortAnswer();
+        } else {
+          document.getElementById('btn-next').click();
+        }
+      }
+    });
+
+    // 다음 문제 이동
+    document.getElementById('btn-next').onclick = () => {
+      if (curIdx < activeList.length - 1) {
+        curIdx++;
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    };
+
+    function updateWrongBadge() {
+      document.getElementById('btn-wrong-tab').innerText = `오답노트 (${wrongBank.length})`;
+    }
+
+    // 결과 화면
+    function showResults() {
+      document.getElementById('status-panel').style.display = 'none';
+      document.getElementById('quiz-card').style.display = 'none';
+      document.getElementById('result-card').style.display = 'flex';
+
+      const total = activeList.length;
+      const pct = Math.round((score / total) * 100);
+
+      document.getElementById('res-score-badge').innerText = `${pct}%`;
+      document.getElementById('res-total').innerText = total;
+      document.getElementById('res-correct').innerText = score;
+      document.getElementById('res-wrong').innerText = total - score;
+
+      const heading = document.getElementById('res-heading');
+      const desc = document.getElementById('res-desc');
+
+      if (pct >= 90) {
+        heading.innerText = '논술 인출 최상위권 달성! 🏆';
+        desc.innerText = '단답형 키워드와 핵심 이론의 개념 구조가 완벽하게 정립되어 있습니다.';
+      } else if (pct >= 70) {
+        heading.innerText = '우수한 인출 실력! 👏';
+        desc.innerText = '틀린 단답형 키워드와 논술 모범 서술 문장만 2~3회 정독하면 만점권입니다.';
+      } else {
+        heading.innerText = '반복 쓰기 훈련이 필요합니다! 💪';
+        desc.innerText = '오답노트 및 [논술 단답형만] 탭을 활용하여 키워드를 직접 타이핑하며 외우세요.';
+      }
+
+      // 오답 목록 렌더링
+      const reviewList = document.getElementById('review-list');
+      reviewList.innerHTML = '';
+      const failed = activeList.filter(item => wrongBank.includes(item.id));
+
+      if (failed.length === 0) {
+        reviewList.innerHTML = '<div style="text-align:center; padding:12px; color:#16a34a; font-weight:700;">틀린 문제가 없습니다! 완벽한 인출입니다. 🎉</div>';
+      } else {
+        failed.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'review-item';
+          const answerText = item.type === 'choice' ? item.options[item.answer] : item.validAnswers[0];
+          div.innerHTML = `
+            <div style="font-weight:700; color:#0f172a; margin-bottom:2px;">[${item.type === 'short' ? '단답' : '객관식'}·${item.category}] ${item.q}</div>
+            <div style="color:#15803d; font-weight:700;">정답: ${answerText}</div>
+            <div style="color:#1e40af; font-size:11.5px; margin-top:3px; background:#eff6ff; padding:4px 6px; border-radius:4px;">
+              <b>논술 문장:</b> ${item.essayTip}
+            </div>
+          `;
+          reviewList.appendChild(div);
+        });
+      }
+    }
+
+    // 탭 전환 핸들러
+    function setFilterActive(key) {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        if (btn.getAttribute('data-filter') === key) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.onclick = () => {
+        const key = btn.getAttribute('data-filter');
+        setFilterActive(key);
+        initQuiz(key);
+      };
+    });
+
+    document.getElementById('btn-shuffle').onclick = () => initQuiz(currentFilter);
+    document.getElementById('btn-restart-all').onclick = () => {
+      setFilterActive('all');
+      initQuiz('all');
+    };
+    document.getElementById('btn-restart-wrong').onclick = () => {
+      setFilterActive('wrong');
+      initQuiz('wrong');
+    };
+
+    // DOM 로드 즉시 실행
+    window.addEventListener('DOMContentLoaded', () => {
+      initQuiz('all');
+    });
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      initQuiz('all');
+    }
+  </script>
+</body>
+</html>
