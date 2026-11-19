@@ -19,53 +19,83 @@
         .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
     </style>
 </head>
-<body class="min-h-screen flex justify-center items-start md:items-center p-0 md:p-8">
+<body class="min-h-screen bg-gray-50/50 p-4 md:p-8 text-gray-800">
 
-    <div class="w-full md:max-w-3xl bg-white md:rounded-[2rem] md:shadow-2xl overflow-hidden flex flex-col h-[100dvh] md:h-[90vh]">
-        <!-- Header -->
-        <header class="pt-6 px-6 pb-0 border-b border-gray-100 flex-shrink-0 bg-white z-10 relative">
-            <div class="flex justify-between items-start mb-4">
-                <h1 class="text-2xl font-extrabold gradient-text leading-tight">교육학 실전 20제<br><span class="text-lg text-indigo-400">2026 트렌드 완벽대비</span></h1>
-                <button onclick="generateNewSet()" class="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 px-4 py-2 rounded-xl font-bold text-sm shadow-sm transition-colors flex items-center gap-1">
-                    🔄 새 세트 섞기
-                </button>
-            </div>
-            <div class="flex space-x-2 relative overflow-x-auto hide-scrollbar pb-1" id="tabs"></div>
+    <div class="max-w-5xl mx-auto">
+        <!-- 메인 헤더 영역 -->
+        <header class="text-center mb-8 pt-4">
+            <p class="text-pink-500 font-bold text-sm mb-3 tracking-wide">SANTA 파이널 전 범위 • 2026 트렌드 완결판</p>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-indigo-900 mb-4 tracking-tight">임용고시 교육학 마스터: 교육과정 100제</h1>
+            <p class="text-gray-500 font-medium">20문항 × 5개 세트 구성 · 매 시작 및 새로고침 시 문항과 4지선다 보기가 자동 셔플됩니다</p>
         </header>
 
-        <!-- Main Content -->
-        <main class="flex-1 overflow-y-auto p-6 flex flex-col relative bg-[#fcfdfd]" id="main-content">
-            <div class="flex justify-between items-center mb-5">
-                <span id="q-type-badge" class="px-3 py-1 bg-indigo-50 text-indigo-600 text-xs font-extrabold rounded-full tracking-tight">✅ 4지선다형</span>
-                <span id="q-progress" class="text-xs font-bold text-gray-400 bg-gray-50 px-3 py-1 rounded-full"></span>
-            </div>
+        <!-- 탭 내비게이션 -->
+        <div class="flex flex-wrap justify-center gap-2 mb-10" id="top-tabs">
+            <!-- 탭이 동적으로 렌더링됩니다 -->
+        </div>
 
-            <h2 id="q-text" class="text-[1.2rem] md:text-xl font-bold leading-relaxed mb-6 break-keep text-gray-800"></h2>
-
-            <div id="input-area" class="mb-6 w-full"></div>
-
-            <div id="feedback-area" class="hidden flex-col gap-4 mb-6">
-                <div id="fb-alert" class="p-4 rounded-2xl font-bold text-lg shadow-sm"></div>
-                <div class="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm">
-                    <p class="text-xs font-extrabold text-gray-400 mb-2 tracking-wider">📖 개념 해설</p>
-                    <p id="fb-exp" class="text-gray-700 leading-relaxed font-medium break-keep"></p>
+        <!-- 뷰 1: 모의고사 세트 목록 화면 -->
+        <div id="view-home" class="animate-fade-in">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-6">
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800 mb-1">학습할 모의고사 세트를 선택하세요</h2>
+                    <p class="text-sm text-gray-500">총 100문항이 주제별 5개 세트(각 20문항)로 체계적으로 구성되어 있습니다.</p>
                 </div>
-                <div class="p-5 bg-blue-50/50 rounded-2xl border border-blue-100 shadow-sm">
-                    <p class="text-xs font-extrabold text-blue-500 mb-2 tracking-wider">🔑 암기 키워드 & 두문자</p>
-                    <p id="fb-m" class="text-blue-900 leading-relaxed font-bold"></p>
-                </div>
-                <div class="p-5 bg-amber-50/50 rounded-2xl border border-amber-100 shadow-sm">
-                    <p class="text-xs font-extrabold text-amber-600 mb-2 tracking-wider">✍️ 실전 논술 (2026 트렌드 연계)</p>
-                    <p id="fb-tip" class="text-amber-900 leading-relaxed font-medium break-keep"></p>
+                <div class="mt-4 md:mt-0 flex items-center gap-1 text-indigo-500 text-sm font-bold bg-indigo-50 px-3 py-1.5 rounded-lg">
+                    <span>🔀 보기 순서 100% 무작위 재배치 적용</span>
                 </div>
             </div>
-            <div class="flex-grow"></div>
-        </main>
 
-        <!-- Footer -->
-        <footer class="p-5 border-t border-gray-50 bg-white flex-shrink-0 pb-8 md:pb-5 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]">
-            <button id="action-btn" class="w-full btn-main text-white font-bold text-lg py-4 rounded-2xl shadow-lg hover:shadow-indigo-500/30">정답 확인</button>
-        </footer>
+            <!-- 세트 카드 그리드 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="set-grid">
+                <!-- 카드들이 동적으로 렌더링됩니다 -->
+            </div>
+        </div>
+
+        <!-- 뷰 2: 퀴즈 풀이 화면 (초기 숨김) -->
+        <div id="view-quiz" class="hidden animate-fade-in max-w-3xl mx-auto bg-white rounded-[2rem] shadow-xl overflow-hidden flex-col h-[85vh]">
+            <!-- Quiz Header -->
+            <div class="pt-6 px-6 pb-4 border-b border-gray-100 flex-shrink-0 bg-white flex justify-between items-center">
+                <h2 id="quiz-header-title" class="text-lg font-extrabold text-indigo-900">제1세트</h2>
+                <button onclick="showHomeView()" class="text-sm font-bold text-gray-500 hover:text-indigo-600 transition-colors bg-gray-100 hover:bg-indigo-50 px-4 py-2 rounded-xl">
+                    목록으로 돌아가기
+                </button>
+            </div>
+
+            <!-- Quiz Content -->
+            <main class="flex-1 overflow-y-auto p-6 md:p-8 flex flex-col relative bg-[#fcfdfd]" id="main-content">
+                <div class="flex justify-between items-center mb-5">
+                    <span class="px-3 py-1 bg-indigo-50 text-indigo-600 text-xs font-extrabold rounded-full tracking-tight">✅ 4지선다형</span>
+                    <span id="q-progress" class="text-xs font-bold text-gray-500 bg-gray-100 px-3 py-1 rounded-full"></span>
+                </div>
+
+                <h2 id="q-text" class="text-[1.2rem] md:text-xl font-bold leading-relaxed mb-6 break-keep text-gray-800"></h2>
+
+                <div id="input-area" class="mb-6 w-full"></div>
+
+                <div id="feedback-area" class="hidden flex-col gap-4 mb-6">
+                    <div id="fb-alert" class="p-4 rounded-2xl font-bold text-lg shadow-sm"></div>
+                    <div class="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                        <p class="text-xs font-extrabold text-gray-400 mb-2 tracking-wider">📖 개념 해설</p>
+                        <p id="fb-exp" class="text-gray-700 leading-relaxed font-medium break-keep"></p>
+                    </div>
+                    <div class="p-5 bg-blue-50/50 rounded-2xl border border-blue-100 shadow-sm">
+                        <p class="text-xs font-extrabold text-blue-500 mb-2 tracking-wider">🔑 암기 키워드 & 두문자</p>
+                        <p id="fb-m" class="text-blue-900 leading-relaxed font-bold"></p>
+                    </div>
+                    <div class="p-5 bg-amber-50/50 rounded-2xl border border-amber-100 shadow-sm">
+                        <p class="text-xs font-extrabold text-amber-600 mb-2 tracking-wider">✍️ 실전 논술 (2026 트렌드 연계)</p>
+                        <p id="fb-tip" class="text-amber-900 leading-relaxed font-medium break-keep"></p>
+                    </div>
+                </div>
+                <div class="flex-grow"></div>
+            </main>
+
+            <!-- Quiz Footer -->
+            <footer class="p-5 border-t border-gray-50 bg-white flex-shrink-0">
+                <button id="action-btn" class="w-full btn-main text-white font-bold text-lg py-4 rounded-2xl shadow-lg hover:shadow-indigo-500/30">정답 확인</button>
+            </footer>
+        </div>
     </div>
 
 <script>
@@ -171,29 +201,26 @@ for (let i = 0; i < 100; i++) {
 }
 // ----------------------------------------------------------------------
 
+// --- 세트 메타데이터 정의 ---
+const setMetadata = [
+    { id: 1, title: "제1세트: 교육과정의 이해 및 유형", desc: "공식적 교육과정, 잠재적 교육과정, 영 교육과정, 교과중심 교육과정 등" },
+    { id: 2, title: "제2세트: 교육과정 설계와 유형", desc: "경험중심, 학문중심(발견학습, 지식의 구조), 인간중심, 역량중심, 통합 교육과정" },
+    { id: 3, title: "제3세트: 교육과정 개발 모형 I", desc: "타일러의 합리적 모형, 타바의 단원 개발 모형, 스킬벡의 SBCD 등" },
+    { id: 4, title: "제4세트: 교육과정 개발 모형 II", desc: "백워드 설계, 워커의 실제적 모형, 아이즈너의 예술적 모형, 파이나의 재개념화" },
+    { id: 5, title: "제5세트: 교육과정 실행 및 최신 동향", desc: "교육과정 실행 관점, 교육과정 재구성, 집중이수제, 고교학점제, 2022 개정" }
+];
+
 // --- 상태 관리 ---
 let sessionQuestions = [];
 let currentQuestionIndex = 0;
-let currentTab = 'session'; 
-
-// Canvas 샌드박스 완벽 대응 (LocalStorage 오류 무시 및 메모리 캐시 활용)
-let memoryNotes = [];
-function loadNotesSafely() {
-    try {
-        const saved = localStorage.getItem('eduQuiz2026_MCQ_V2');
-        if (saved) return JSON.parse(saved);
-    } catch (e) { console.warn('Canvas 샌드박스 환경이므로 메모리에만 저장됩니다.'); }
-    return memoryNotes;
-}
-function saveNotesSafely(notes) {
-    memoryNotes = notes;
-    try { localStorage.setItem('eduQuiz2026_MCQ_V2', JSON.stringify(notes)); } catch (e) {}
-}
-let incorrectNotes = loadNotesSafely();
+let currentActiveSetId = 0; // 0 = Home(전체목록), 1~5 = Set ID
 
 const els = {
-    tabs: document.getElementById('tabs'),
-    qTypeBadge: document.getElementById('q-type-badge'),
+    topTabs: document.getElementById('top-tabs'),
+    viewHome: document.getElementById('view-home'),
+    viewQuiz: document.getElementById('view-quiz'),
+    setGrid: document.getElementById('set-grid'),
+    quizHeaderTitle: document.getElementById('quiz-header-title'),
     qProgress: document.getElementById('q-progress'),
     qText: document.getElementById('q-text'),
     inputArea: document.getElementById('input-area'),
@@ -206,7 +233,7 @@ const els = {
     mainContent: document.getElementById('main-content')
 };
 
-// 유틸리티
+// 배열 셔플 유틸리티
 const shuffle = (array) => {
     let curr = array.length, rand;
     while (curr !== 0) {
@@ -217,72 +244,77 @@ const shuffle = (array) => {
     return array;
 };
 
-// [핵심] 새로운 20제 세트 무작위 추출 및 세팅
-function generateNewSet() {
-    // 1. 전체 100문항 셔플
-    const shuffledAll = shuffle([...allData]);
-    // 2. 20문항 추출
-    sessionQuestions = shuffledAll.slice(0, 20);
-    // 3. 각 문항의 보기(Choices) 무작위 셔플
+// 1. 상단 탭 렌더링
+function renderTopTabs() {
+    let html = `<button onclick="showHomeView()" class="px-5 py-2.5 rounded-full font-bold text-sm transition-colors shadow-sm ${currentActiveSetId === 0 ? 'bg-indigo-600 text-white' : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'}">전체 세트 목록</button>`;
+    
+    setMetadata.forEach(set => {
+        const isActive = currentActiveSetId === set.id;
+        html += `<button onclick="startSet(${set.id})" class="px-5 py-2.5 rounded-full font-bold text-sm transition-colors ${isActive ? 'bg-indigo-600 text-white shadow-sm' : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'}">${set.id}세트 (20제)</button>`;
+    });
+    
+    els.topTabs.innerHTML = html;
+}
+
+// 2. 홈 화면(세트 목록) 렌더링
+function renderHomeView() {
+    let html = '';
+    setMetadata.forEach(set => {
+        html += `
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full">
+            <div>
+                <div class="flex justify-between items-center mb-4">
+                    <span class="bg-indigo-50 text-indigo-600 font-bold text-xs px-3 py-1 rounded-full">SET 0${set.id} - 20문항</span>
+                    <span class="bg-gray-100 text-gray-500 font-bold text-xs px-3 py-1 rounded-full">미응시</span>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 mb-2 leading-tight">${set.title}</h3>
+                <p class="text-sm text-gray-500 mb-6 leading-relaxed">${set.desc}</p>
+            </div>
+            <div class="flex justify-between items-center border-t border-gray-50 pt-4 mt-auto">
+                <span class="text-xs text-gray-400 font-medium">객관식 4지선다 · 보기 자동 셔플</span>
+                <button onclick="startSet(${set.id})" class="text-indigo-600 font-bold text-sm flex items-center gap-1 hover:text-indigo-800 transition-colors">
+                    세트 풀기 <span class="text-lg leading-none">→</span>
+                </button>
+            </div>
+        </div>
+        `;
+    });
+    els.setGrid.innerHTML = html;
+}
+
+function showHomeView() {
+    currentActiveSetId = 0;
+    els.viewQuiz.classList.add('hidden');
+    els.viewHome.classList.remove('hidden');
+    renderTopTabs();
+    renderHomeView();
+}
+
+// 3. 특정 세트 시작하기 (초기화 및 문제 셔플 적용)
+function startSet(setId) {
+    currentActiveSetId = setId;
+    const startIndex = (setId - 1) * 20;
+    const endIndex = startIndex + 20;
+    
+    // 해당 세트의 20문제 가져오기
+    let targetQuestions = allData.slice(startIndex, endIndex);
+    
+    // [요구사항 반영] 매 시작 및 새로고침 시 문항과 4지선다 보기 자동 셔플
+    sessionQuestions = shuffle([...targetQuestions]);
     sessionQuestions.forEach(q => {
         q.choices = shuffle([...q.choices]);
     });
-    
+
     currentQuestionIndex = 0;
-    currentTab = 'session';
+    els.quizHeaderTitle.textContent = setMetadata.find(s => s.id === setId).title;
     
-    // UI 초기화
-    els.feedbackArea.classList.add('hidden');
-    els.actionBtn.textContent = "정답 확인";
-    els.actionBtn.classList.remove('from-emerald-500', 'to-teal-600');
+    // 뷰 전환
+    els.viewHome.classList.add('hidden');
+    els.viewQuiz.classList.remove('hidden');
+    els.viewQuiz.classList.add('flex'); // Flexbox 복구
     
-    renderTabs();
+    renderTopTabs();
     renderQuestion();
-}
-
-function renderTabs() {
-    const tabsData = [
-        { id: 'session', label: '🔥 실전 20제 모의고사' },
-        { id: 'incorrect', label: '오답 노트', badge: incorrectNotes.length }
-    ];
-
-    els.tabs.innerHTML = tabsData.map(tab => {
-        const isActive = currentTab === tab.id;
-        const colorClass = isActive ? "text-indigo-700 border-indigo-600 bg-indigo-50/50" : "text-gray-500 border-transparent hover:text-indigo-500 hover:bg-gray-50";
-        const badgeHTML = tab.badge > 0 ? `<span class="absolute top-1 right-2 bg-pink-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">${tab.badge}</span>` : '';
-        return `<div class="px-5 py-3 font-extrabold text-[15px] whitespace-nowrap transition-all duration-200 border-b-[3px] relative cursor-pointer rounded-t-xl ${colorClass}" onclick="switchTab('${tab.id}')">${tab.label} ${badgeHTML}</div>`;
-    }).join('');
-}
-
-function switchTab(tabId) {
-    currentTab = tabId;
-    renderTabs();
-    currentQuestionIndex = 0;
-
-    if (tabId === 'session') {
-        if(sessionQuestions.length === 0) generateNewSet();
-        else renderQuestion();
-    } else if (tabId === 'incorrect') {
-        if (incorrectNotes.length === 0) {
-            showEmptyState('오답 노트가 비어있습니다! 🎉');
-        } else {
-            // 오답노트 문항들의 보기도 셔플
-            sessionQuestions = shuffle([...incorrectNotes]);
-            sessionQuestions.forEach(q => q.choices = shuffle([...q.choices]));
-            renderQuestion();
-        }
-    }
-}
-
-function showEmptyState(msg) {
-    els.qTypeBadge.textContent = "INFO";
-    els.qProgress.textContent = "Clear";
-    els.qText.innerHTML = `<div class="text-center py-10"><span class="text-3xl mb-4 block">🎉</span><span class="text-gray-500 font-bold">${msg}</span></div>`;
-    els.inputArea.innerHTML = "";
-    els.feedbackArea.classList.add('hidden');
-    els.actionBtn.textContent = "새 모의고사 시작하기";
-    els.actionBtn.onclick = generateNewSet;
-    els.actionBtn.classList.remove('from-emerald-500', 'to-teal-600');
 }
 
 let selectedMcqAns = "";
@@ -292,11 +324,8 @@ function renderQuestion() {
     els.feedbackArea.classList.remove('flex', 'animate-fade-in');
     els.mainContent.scrollTo({ top: 0, behavior: 'smooth' });
     
-    if(!sessionQuestions[currentQuestionIndex]) return;
-
     const q = sessionQuestions[currentQuestionIndex];
-    els.qTypeBadge.textContent = '✅ 4지선다형';
-    els.qProgress.textContent = `${q.topic} | ${currentQuestionIndex + 1} / ${sessionQuestions.length}`;
+    els.qProgress.textContent = `진행도: ${currentQuestionIndex + 1} / 20`;
     els.qText.textContent = q.q;
 
     els.actionBtn.textContent = "정답 확인하기";
@@ -340,20 +369,6 @@ function checkAnswer() {
         }
     });
 
-    if (!isCorrect) {
-        if (!incorrectNotes.find(n => n.id === q.id)) {
-            incorrectNotes.push(q);
-            saveNotesSafely(incorrectNotes);
-            renderTabs(); 
-        }
-    } else {
-        if(currentTab === 'incorrect') {
-            incorrectNotes = incorrectNotes.filter(n => n.id !== q.id);
-            saveNotesSafely(incorrectNotes);
-            renderTabs();
-        }
-    }
-
     showFeedback(isCorrect, q);
 }
 
@@ -373,7 +388,7 @@ function showFeedback(isCorrect, q) {
     els.fbM.innerHTML = q.m;
     els.fbTip.innerHTML = q.tip;
 
-    els.actionBtn.textContent = "다음 문제로 이동 (Enter ⏎)";
+    els.actionBtn.textContent = currentQuestionIndex < 19 ? "다음 문제로 이동 (Enter ⏎)" : "세트 종료 및 결과 보기";
     els.actionBtn.classList.add('from-emerald-500', 'to-teal-600');
     els.actionBtn.onclick = nextQuestion;
     
@@ -387,21 +402,26 @@ function nextQuestion() {
     if (currentQuestionIndex < sessionQuestions.length) {
         renderQuestion();
     } else {
-        showEmptyState(currentTab === 'session' ? '수고하셨습니다! 20제 모의고사를 완료했습니다.' : '오답노트 복습을 완료했습니다.');
+        alert("해당 세트의 20문항을 모두 풀었습니다! 목록으로 돌아갑니다.");
+        showHomeView();
     }
 }
 
 function setupEventListeners() {
     document.addEventListener('keydown', (e) => {
+        if (currentActiveSetId === 0) return; // 홈 화면에서는 엔터키 무시
         if (e.key === 'Enter') {
-            if (els.actionBtn.textContent.includes('다음') || els.actionBtn.textContent.includes('시작')) els.actionBtn.click();
+            if (els.actionBtn.textContent.includes('다음') || els.actionBtn.textContent.includes('종료')) els.actionBtn.click();
             else checkAnswer();
         }
     });
 }
 
 // 초기화
-document.addEventListener('DOMContentLoaded', generateNewSet);
+document.addEventListener('DOMContentLoaded', () => {
+    showHomeView();
+    setupEventListeners();
+});
 </script>
 </body>
 </html>
